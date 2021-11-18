@@ -4,6 +4,7 @@ import { InfoList } from "./list"
 import qs from 'qs'
 import { cleanObject } from 'utils'
 import {useUserMount} from 'customized-hooks/userMount'
+import {useDebounce} from 'customized-hooks/useDebounce'
 
 const base_url = process.env.REACT_APP_API_URL
 console.log(base_url);
@@ -28,6 +29,7 @@ export const ProjectListScreen = () => {
       })
   })
 
+  const debounceValue = useDebounce(param, 500)
   useEffect(() => {
     const query = qs.stringify(cleanObject(param))
     console.log(query);
@@ -38,7 +40,7 @@ export const ProjectListScreen = () => {
           setList(await response.json())
         }
       })
-  }, [param])
+  }, [debounceValue])
 
   return <div>
     <SearchPanel param={param} setParam={setParam} users={users}></SearchPanel>

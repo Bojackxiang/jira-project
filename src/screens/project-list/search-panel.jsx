@@ -1,25 +1,6 @@
-export const SearchPanel = () => {
-
-  const [param, setParam] = useState({
-    name: '',
-    personalId: '',
-  })
-
-  const [users, setUsers] = useState([])
-  const [list, setList] = useState([])
-
-  useEffect(() => {
-    fetch('')
-    .then(async response => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    })
-    return () => {
-
-    }
-  }, [param])
-
+export const SearchPanel = (props) => {
+  const {param,setParam, users} = props;
+  console.log(users.length)
   return <form>
     <div>
       <input
@@ -34,11 +15,11 @@ export const SearchPanel = () => {
       <select name="" id="" value={param.personalId}
         onChange={e => setParam({
           ...param,
-          personalId: e.target.value
+          personId: e.target.value
         })}>
         {
           users.map(user => (
-            <option value={user.id}>{user.name}</option>
+            <option value={user.id} key={user.id}>{user.name}</option>
           ))
         }
 

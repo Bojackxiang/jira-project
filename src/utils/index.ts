@@ -1,4 +1,4 @@
-const isFalsy = (value: any) =>
+const isFalsy = (value: unknown) =>
   value === false || value === null || value === undefined || value === "";
 
 export const cleanObject = (targetObj: object) => {

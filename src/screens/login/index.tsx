@@ -14,11 +14,13 @@ export const LoginScreen = () => {
     const response = await login({ username, password });
   };
   // login
-  const { login, user } = useAuth();
+  const { login, user, logout } = useAuth();
 
   return (
     <div>
       {user?.name ? user?.name : <h2>登陆</h2>}
+
+      {user?.name ? <button onClick={logout}>登出</button> : null}
 
       <form action="" onSubmit={handleSubmit}>
         <div>

@@ -18,6 +18,7 @@ const AuthContextSample = React.createContext<
 >(undefined);
 AuthContextSample.displayName = "AuthContextSample";
 
+// 这个用来 包裹整个 App 的
 export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
@@ -37,6 +38,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   );
 };
 
+// 这个是用来在 component 里面调用 方法的
 export const useAuth = () => {
   const context = React.useContext(AuthContextSample);
   if (!context) {

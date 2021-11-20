@@ -1,40 +1,53 @@
+import { Button, Input, Form, Card } from "antd";
+import { login } from "auth-provider";
 import { useAuth } from "context/auth-context";
-import { fakeLogin } from "fake_requests/login";
-import React, { FormEvent, FormEventHandler } from "react";
-
-const base_url = process.env.REACT_APP_API_URL;
+import { FormEvent } from "react";
 
 export const LoginScreen = () => {
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const username = (event.currentTarget.elements[0] as HTMLInputElement)
-      .value;
-    const password = (event.currentTarget.elements[1] as HTMLInputElement)
-      .value;
-    const response = await login({ username, password });
+  const handleSubmit = async (param: {
+    username: string;
+    password: string;
+  }) => {
+    login({ ...param });
   };
+
   // login
-  const { login, user, logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
-    <div>
-      {user?.name ? user?.name : <h2>登陆</h2>}
+    <div
+      style={{
+        margin: "0 auto",
+        width: 500,
+      }}
+    >
+      <Card>
+        {user?.name ? user?.name : <h2>登陆</h2>}
 
-      {user?.name ? <button onClick={logout}>登出</button> : null}
+        {user?.name ? <button onClick={logout}>登出</button> : null}
 
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">用户名</label>
-          <input type="text" id="username" />
-        </div>
-        <div>
-          <label htmlFor="username">密码</label>
-          <input type="text" id="password" />
-        </div>
-        <div>
-          <button type="submit">登陆</button>
-        </div>
-      </form>
+        <Form onFinish={handleSubmit}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: "请输入用户名" }]}
+          >
+            <Input type="text" id="username" placeholder="请输入用户名" />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: "请输入密码" }]}
+          >
+            <Input type="text" id="password" placeholder="请输入用户名" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button htmlType="submit" type="primary">
+              登陆
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };

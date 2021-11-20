@@ -22,7 +22,7 @@ export const ProjectListScreen = () => {
     console.log(query);
     fetch(`${base_url}/users`).then(async (response) => {
       if (response.ok) {
-        console.log();
+        // console.log(await response.json());
         setUsers(await response.json());
       }
     });

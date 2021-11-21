@@ -22,11 +22,8 @@ export const http = async (
     ...customizedConfig,
   };
 
-  console.log("GET HERE 1");
   if (config.methods.toUpperCase() === "GET") {
-    console.log("GET HERE 2", data);
     endpoint += `?${qs.stringify(data)}`;
-    console.log("GET HERE 3", endpoint);
   } else {
     config.body = JSON.stringify(data || {});
   }

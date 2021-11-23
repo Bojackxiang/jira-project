@@ -1,6 +1,7 @@
 import { Project, User } from "interfaces";
 import { Table } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface IInfoList {
   list: Project[];
@@ -19,6 +20,9 @@ export const InfoList = (props: IInfoList) => {
           title: "名称",
           dataIndex: "name",
           sorter: (a, b) => a.name.localeCompare(b.name),
+          render: (value, project) => {
+            return <Link to={`${project.id}`}>{project.name}</Link>;
+          },
         },
         {
           title: "负责人",

@@ -41,3 +41,7 @@ export const useDocumentTitle = (
     };
   }, [keepUnMount, titleRef]);
 };
+
+// 充值路由的方法
+export const resetRouter = () =>
+  (window.location.href = window.location.origin);

@@ -17,6 +17,7 @@ const ProjectScreen = () => {
         <Route path="/tasks" element={<Tasks />}></Route>
         <Route path="/board" element={<Board />}></Route>
         {/* <Navigate to={`${window.location.pathname}/board`} /> */}
+        {/* 上面的问题可以直接使用 switch 来解决 */}
       </Routes>
       Project screen
     </div>

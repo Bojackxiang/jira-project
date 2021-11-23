@@ -14,7 +14,7 @@ interface ISearchPanel {
 
 export const SearchPanel = (props: ISearchPanel) => {
   const { param, setParam, users } = props;
-  console.log(users.length);
+
   return (
     <Form>
       <div>

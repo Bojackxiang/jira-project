@@ -58,7 +58,8 @@ export const useAsync = <D>(initialState?: IState<D>) => {
       })
       .catch((error) => {
         setError(error);
-        return error;
+        // 这边需要主动抛出异常，否则不会被 捕获到
+        return Promise.reject(error);
       });
   };
 

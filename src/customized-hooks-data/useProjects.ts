@@ -7,7 +7,7 @@ import { useHttp } from "utils/http";
 
 const useProjects = (param: { name: string; personId: string }) => {
   const [list, setList] = useState([]);
-  const { run, data, ...result } = useAsync<Project[] | void>();
+  const { run, data, isLoading, ...result } = useAsync<Project[] | void>();
   const client = useHttp();
 
   const debounceValue = useDebounce(param, 500);
@@ -18,6 +18,7 @@ const useProjects = (param: { name: string; personId: string }) => {
 
   return {
     list,
+    isLoading,
   };
 };
 

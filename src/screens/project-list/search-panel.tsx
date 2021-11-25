@@ -41,6 +41,9 @@ export const SearchPanel = (props: ISearchPanel) => {
             })
           }
         >
+          <Select.Option value={-1} key={"-1"}>
+            请选择
+          </Select.Option>
           {users.map((user) => (
             <Select.Option value={user.id} key={user.id}>
               {user.name}

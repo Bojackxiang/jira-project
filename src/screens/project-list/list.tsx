@@ -2,6 +2,7 @@ import { Project, User } from "interfaces";
 import { Table } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUrlQueryParams } from "utils";
 
 interface IInfoList {
   list: Project[];
@@ -10,7 +11,7 @@ interface IInfoList {
 
 export const InfoList = (props: IInfoList) => {
   const { list, users } = props;
-  console.log(list, users);
+
   return (
     <Table
       pagination={false}

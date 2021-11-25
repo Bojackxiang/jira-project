@@ -3,8 +3,12 @@ import Board from "components/board";
 import Tasks from "components/tasks";
 import { Routes, Route, Navigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useUrlQueryParams } from "utils";
 
 const ProjectScreen = () => {
+  const [result, setSearchParam] = useUrlQueryParams(["name", "id"]);
+
+  console.log(result);
   return (
     <div>
       <Link to="tasks">任务组</Link>

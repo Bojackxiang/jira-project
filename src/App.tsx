@@ -8,15 +8,27 @@ import { useDocumentTitle } from "utils";
 import { Navigate, Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import ProjectScreen from "screens/project-screen";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "antd";
+import {
+  projectListActions,
+  selectProjectModelState,
+} from "store/loadingState";
 
 function App() {
   const {} = useAuth();
-
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector(selectProjectModelState);
+  console.log(isModalOpen);
   // 需要更新的页面标签名称
   useDocumentTitle("主页面", false);
 
   return (
     <div className="App">
+      <Button onClick={() => dispatch(projectListActions.openLoadingModal())}>
+        {" "}
+        toggle loading{" "}
+      </Button>
       <Routes>
         <Route path="/login" element={<LoginScreen />}></Route>
         <Route path="/register" element={<RegisterScreen />}></Route>

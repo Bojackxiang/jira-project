@@ -14,7 +14,7 @@ export const ProjectListScreen = () => {
   const { userList } = useUsers();
 
   // 这就是一个 类型守卫
-  const isErrorGuard = (input: any): input is Error => input.message;
+  const isErrorGuard = (input: any): input is Error => input?.message;
 
   return (
     <div>

@@ -5,6 +5,7 @@ import { http } from "utils/http";
 import { useUserMount } from "customized-hooks/userMount";
 import { useDispatch } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 export interface AuthForm {
   username: string;
@@ -52,6 +53,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
       <AuthContextSample.Provider
         children={props.children}
         value={{ user, login, register, logout }}

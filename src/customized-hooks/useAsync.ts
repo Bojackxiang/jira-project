@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface IState<D> {
   error: Error | null;
@@ -63,12 +63,15 @@ export const useAsync = <D>(initialState?: IState<D>) => {
       });
   };
 
+  // hook 返回函数使用 usecallback
+  const run_useCallback = useCallback(run, []);
+
   return {
     isIdle: state.stat === "idle",
     isLoading: state.stat === "loading",
     isSuccess: state.stat === "success",
     isError: state.stat === "error",
-    run,
+    run: run_useCallback,
     setError,
     setData,
     ...state,

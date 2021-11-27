@@ -2,13 +2,16 @@ import { Button, Input, Form, Card } from "antd";
 import { login } from "auth-provider";
 import { useAuth } from "context/auth-context";
 import { FormEvent } from "react";
+import { useDispatch } from "react-redux";
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
   const handleSubmit = async (param: {
     username: string;
     password: string;
   }) => {
-    login({ ...param });
+    // login({ ...param });
+    dispatch(login({ ...param }));
   };
 
   // login

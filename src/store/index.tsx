@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { loadingModalSlice } from "./loadingState";
+import { authSlice } from "./auth.sclice";
 
 // this is the reducer for redux
 export const rootReducer = {
   loading: loadingModalSlice.reducer,
+  auth: authSlice.reducer,
 };
 
 // store

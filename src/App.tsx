@@ -14,6 +14,7 @@ import {
   projectListActions,
   selectProjectModelState,
 } from "store/loadingState";
+import { AppDispatch } from "store";
 
 function App() {
   const {} = useAuth();

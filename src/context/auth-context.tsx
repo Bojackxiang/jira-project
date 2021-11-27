@@ -3,13 +3,14 @@ import * as auth from "auth-provider";
 import { User } from "interfaces";
 import { http } from "utils/http";
 import { useUserMount } from "customized-hooks/userMount";
+import { useDispatch } from "react-redux";
 
-interface AuthForm {
+export interface AuthForm {
   username: string;
   password: string;
 }
 
-const bootstrapUesr = async () => {
+export const bootstrapUesr = async () => {
   let user = null;
   const token = auth.getToken();
   if (token) {
@@ -23,8 +24,8 @@ const bootstrapUesr = async () => {
 const AuthContextSample = React.createContext<
   | {
       user: User | null;
-      login: (form: AuthForm) => Promise<void>;
-      register: (form: AuthForm) => Promise<void>;
+      login: (form: AuthForm) => Promise<{ user: User }>;
+      register: (form: AuthForm) => Promise<{ user: User }>;
       logout: () => Promise<void>;
     }
   | undefined
@@ -34,14 +35,13 @@ AuthContextSample.displayName = "AuthContextSample";
 // 这个用来 包裹整个 App 的
 export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const dispatch = useDispatch();
 
-  const login = (form: AuthForm) =>
-    auth.login(form).then((user) => setUser(user.user));
+  const login = (form: AuthForm) => dispatch(auth.login(form));
 
-  const register = (form: AuthForm) =>
-    auth.register(form).then((user) => setUser(user.user));
+  const register = (form: AuthForm) => dispatch(auth.register(form));
 
-  const logout = () => auth.logout().then(() => setUser(null));
+  const logout = () => dispatch(auth.logout());
 
   useUserMount(() => {
     bootstrapUesr().then(setUser);

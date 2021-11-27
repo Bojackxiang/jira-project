@@ -14,7 +14,6 @@ import {
   projectListActions,
   selectProjectModelState,
 } from "store/loadingState";
-import { AppDispatch } from "store";
 
 function App() {
   const {} = useAuth();
@@ -27,9 +26,12 @@ function App() {
   return (
     <div className="App">
       <Button onClick={() => dispatch(projectListActions.openLoadingModal())}>
-        {" "}
-        toggle loading{" "}
+        open loading
       </Button>
+      <Button onClick={() => dispatch(projectListActions.closeLoadingModal())}>
+        close loading
+      </Button>
+      {isModalOpen ? <div>loading on </div> : <div>loading off</div>}
       <Routes>
         <Route path="/login" element={<LoginScreen />}></Route>
         <Route path="/register" element={<RegisterScreen />}></Route>

@@ -10,19 +10,23 @@ export const ProjectListScreen = () => {
     personId: "",
   });
 
-  const { list, isLoading } = useProjects(param);
+  const { data, isError, isLoading, isFetching, error } = useProjects(param);
   const { userList } = useUsers();
+
+  // 这就是一个 类型守卫
+  const isErrorGuard = (input: any): input is Error => input.message;
 
   return (
     <div>
       <div>{isLoading ? <div>Loading...</div> : <div>not loading</div>}</div>
+      {isErrorGuard(error)}
       <SearchPanel
         param={param}
         setParam={setParam}
         users={userList}
       ></SearchPanel>
 
-      <InfoList list={list} users={userList} />
+      {data && <InfoList list={data} users={userList} />}
     </div>
   );
 };

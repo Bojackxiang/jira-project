@@ -4,6 +4,7 @@ import { User } from "interfaces";
 import { http } from "utils/http";
 import { useUserMount } from "customized-hooks/userMount";
 import { useDispatch } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export interface AuthForm {
   username: string;
@@ -37,6 +38,8 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const dispatch = useDispatch();
 
+  const queryClient = new QueryClient();
+
   const login = (form: AuthForm) => dispatch(auth.login(form));
 
   const register = (form: AuthForm) => dispatch(auth.register(form));
@@ -48,10 +51,12 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   });
 
   return (
-    <AuthContextSample.Provider
-      children={props.children}
-      value={{ user, login, register, logout }}
-    />
+    <QueryClientProvider client={queryClient}>
+      <AuthContextSample.Provider
+        children={props.children}
+        value={{ user, login, register, logout }}
+      />
+    </QueryClientProvider>
   );
 };
 
